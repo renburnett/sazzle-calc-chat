@@ -18,7 +18,6 @@ const Calculator = () => {
 
       useEffect(() => {
         socket.on('chat', (msg) => {
-            console.log('message socket', msg)
             setChatFeed([ ...chatFeed, msg ]);
             localStorage.setItem('chatFeed', JSON.stringify(chatFeed));
         });
@@ -49,7 +48,7 @@ const Calculator = () => {
 
     const calculateTotal = () => {
         const operationsCp = [...operations]; // copy so we dont don't modify original array
-        console.log(operations)
+
         for (const [operator, mathFunc] of operators.entries()) {
             for (let i = 1; i < operationsCp.length - 1; i++) {
                 if (operator === operationsCp[i]) {
@@ -59,7 +58,7 @@ const Calculator = () => {
         }
 
         let finalResult = typeof(operationsCp[0]) === "number" ? operationsCp[0] : operationsCp[1];
-        //TODO: handle negative case
+        if (operationsCp[0] === '-') { finalResult *= -1 };
 
         if (finalResult === undefined) { finalResult = currentCalcScreen }; // if no operation was performed use old result value
 
@@ -70,7 +69,7 @@ const Calculator = () => {
         if (localStorage.getItem('message')) {
             message.userName = JSON.parse(localStorage.getItem('message')).userName
         } else {
-            message.userName = `${ Math.floor(Math.random() * 1000) }`;  
+            message.userName = `${ Math.floor(Math.random() * 10000) }`;  
         }
 
         sendChat();
@@ -85,16 +84,15 @@ const Calculator = () => {
     }
 
     const handleOperationClick = (event) => {
-        console.log(!operationLocked)
-        if (!operationLocked) {
+        if (tempNum !== '') { operations.push(Number(tempNum)); }
 
+        if (!operationLocked) {
             setCurrentCalcScreen(event.target.value);
             operations.push(event.target.value);
 
             operationLocked = true;
             localStorage.setItem('operationLocked', JSON.stringify(true));
         }
-        operations.push(Number(tempNum));
         tempNum = '';
         localStorage.setItem('tempNum', JSON.stringify(tempNum));
         localStorage.setItem('operations', JSON.stringify(operations));
@@ -123,8 +121,7 @@ const Calculator = () => {
 
     const handleNumberClick = (event) => {
         tempNum += event.target.value;
-        console.log('tempNum', tempNum)
-        console.log('operations', operations)
+
         setCurrentCalcScreen(tempNum);
         operationLocked = false;
         
