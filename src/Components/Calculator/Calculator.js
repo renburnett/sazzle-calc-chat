@@ -94,7 +94,7 @@ const Calculator = () => {
             operationLocked = true;
             localStorage.setItem('operationLocked', JSON.stringify(true));
         }
-        
+        operations.push(Number(tempNum));
         tempNum = '';
         localStorage.setItem('tempNum', JSON.stringify(tempNum));
         localStorage.setItem('operations', JSON.stringify(operations));
@@ -103,6 +103,7 @@ const Calculator = () => {
 
     const handleEqualsClick = (event) => {    
         operationLocked = false;
+        operations.push(Number(tempNum));
         calculateTotal();
         
         tempNum = '';
@@ -123,7 +124,6 @@ const Calculator = () => {
     const handleNumberClick = (event) => {
         tempNum += event.target.value;
         console.log('tempNum', tempNum)
-        operations.push(Number(tempNum));
         console.log('operations', operations)
         setCurrentCalcScreen(tempNum);
         operationLocked = false;
