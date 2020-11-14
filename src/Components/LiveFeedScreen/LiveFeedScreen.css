@@ -1,0 +1,30 @@
+.live-feed-screen {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.pull-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pull-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message-bubble-left {
+  border-radius: 0.25rem;
+  background-color: rgba(120, 231, 29, 0.938);
+  color: white;
+  padding: 0.25rem;
+}
+
+.message-bubble-right {
+  border-radius: 0.25rem;
+  background-color: rgba(16, 79, 214, 0.925);
+  color: white;
+  padding: 0.25rem;
+}

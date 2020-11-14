@@ -1,0 +1,23 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.chat-container {
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hr-ting {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-top: 0;
+}
