@@ -18,7 +18,7 @@ const Calculator = () => {
 
       useEffect(() => {
         socket.on('chat', (msg) => {
-            setChatFeed([ ...chatFeed, msg ]);
+            setChatFeed(cfeed => [ ...cfeed, msg ]);
             localStorage.setItem('chatFeed', JSON.stringify(chatFeed));
         });
         return () => {
