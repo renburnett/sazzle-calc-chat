@@ -50,11 +50,13 @@ const Calculator = () => {
         const operationsCp = [...operations]; // copy so we dont don't modify original array
 
         for (const [operator, mathFunc] of operators.entries()) {
-            for (let i = 1; i < operationsCp.length - 1; i++) {
-                if (operator === operationsCp[i]) {
-                    operationsCp.splice(i - 1, 3, mathFunc(operationsCp[i - 1], operationsCp[i + 1])); //replace operands and operator with result
+           while(operationsCp.includes(operator)) {
+                for (let i = 1; i < operationsCp.length - 1; i++) {
+                    if (operator === operationsCp[i]) {
+                        operationsCp.splice(i - 1, 3, mathFunc(operationsCp[i - 1], operationsCp[i + 1])); //replace operands and operator with result
+                    }
                 }
-            }
+           }
         }
 
         let finalResult = typeof(operationsCp[0]) === "number" ? operationsCp[0] : operationsCp[1];
